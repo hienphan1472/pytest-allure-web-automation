@@ -1,9 +1,9 @@
 # Setup
 - Install python 3.7
 - Install library:
-    pip install pipenv
-    pipenv shell (to start a new shell session with the virtualenv)
-    pipenv install --ignore-pipfile (install packages from Pipfile.lock, skip Pipfile)
+    - pip install pipenv
+    - pipenv shell (to start a new shell session with the virtualenv)
+    - pipenv install --ignore-pipfile (install packages from Pipfile.lock, skip Pipfile)
 
 - If you are Pycharm's user:
     Go to Preferences > Project Interpreter > Add > Pipenv Environment > Ok
