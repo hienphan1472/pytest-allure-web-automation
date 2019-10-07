@@ -11,7 +11,7 @@
 
 
 # Run test in parallel with pytest-xdist lib:
-    pytest -n=2 --alluredir=./allure --clean-alluredir
+    pytest -n=2 --alluredir=./allure --clean-alluredir --driver chrome
 
 
 # Generate report:

@@ -10,15 +10,19 @@ from selenium.webdriver.support.ui import Select
 class ComboBox(BaseElement):
 
     def __init__(self, locator):
+        self.__locator = locator
         super().__init__(locator)
 
     def select_by_value(self, value):
+        logging.info(f"select combobox by value: {value}")
         Select(self.find_element()).select_by_value(value)
 
     def select_by_index(self, idx):
+        logging.info(f"select combobox by index: {idx}")
         Select(self.find_element()).select_by_index(idx)
 
     def select_by_visible_text(self, text):
+        logging.info(f"select combobox by visible text: {text}")
         try:
             Select(self.find_element()).select_by_visible_text(text)
         except StaleElementReferenceException as e:

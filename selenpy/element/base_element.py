@@ -35,6 +35,7 @@ class BaseElement:
 
     @property
     def text(self):
+        logging.info(f"get element text by locator: {self.__locator}")
         return self.find_element().text
 
     def format(self, *args):
@@ -47,6 +48,7 @@ class BaseElement:
 
     def click(self):
         try:
+            logging.info(f"click on element by locator: {self.__locator}")
             wait_until(lambda: self.is_enabled())
             self._element.click()
         except ElementClickInterceptedException as e:
@@ -60,9 +62,11 @@ class BaseElement:
         time.sleep(seconds)
 
     def get_attribute(self, name):
+        logging.info(f"get element attribute '{name}' by locator: {self.__locator}")
         return self._element.get_attribute(name)
 
     def send_keys(self, *value):
+        logging.info(f"send keys '{value}' to element by locator: {self.__locator}")
         self._element.send_keys(value)
 
     def __parse_locator(self, locator):
@@ -109,7 +113,7 @@ class BaseElement:
 
     def is_displayed(self, timeout=None):
         try:
-            logging.info("is_displayed: %s" % self.__locator)
+            logging.info(f"is element displayed by locator: {self.__locator}")
             return self.wait_for_visible(timeout).is_displayed()
         except (NoSuchElementException, TimeoutException, StaleElementReferenceException):
             return False
@@ -117,19 +121,23 @@ class BaseElement:
             raise e
 
     def move_to(self):
+        logging.info(f"move to element by locator: {self.__locator}")
         actions = ActionChains(self._driver)
         actions.move_to_element(self._element).perform()
 
     def is_enabled(self):
+        logging.info(f"is element enabled by locator: {self.__locator}")
         return self._element.is_enabled()
 
     def is_selected(self):
+        logging.info(f"is element selected by locator: {self.__locator}")
         return self._element.is_selected()
 
     def wait_for_visible(self, timeout=None):
         if timeout is None:
             timeout = config.timeout
         prefix, criteria = self.__parse_locator(self.__locator)
+        logging.info(f"wait for element visible by locator: {self.__locator}")
         return WebDriverWait(self._driver, timeout).until(
             EC.visibility_of_element_located((self.__by(prefix), criteria)))
 
@@ -137,18 +145,17 @@ class BaseElement:
         if timeout is None:
             timeout = config.timeout
         prefix, criteria = self.__parse_locator(self.__locator)
+        logging.info(f"wait for element invisible by locator: {self.__locator}")
         WebDriverWait(self._driver, timeout).until(EC.invisibility_of_element_located((self.__by(prefix), criteria)))
 
     def wait_for_presence(self, timeout=None):
         if timeout is None:
             timeout = config.timeout
         prefix, criteria = self.__parse_locator(self.__locator)
+        logging.info(f"wait for element presence by locator: {self.__locator}")
         return WebDriverWait(self._driver, timeout).until(
             EC.presence_of_element_located((self.__by(prefix), criteria)))
 
     def scroll_into_view(self):
+        logging.info(f"scroll element into view by locator: {self.__locator}")
         self._driver.execute_script("arguments[0].scrollIntoView();", self._element)
-
-    def get_background_image(self):
-        return self._driver.execute_script("return window.getComputedStyle(arguments[0]).backgroundImage",
-                                           self._element)
