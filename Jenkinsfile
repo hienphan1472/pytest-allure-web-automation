@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jenkins-example' }
+    agent any
     environment {
         ALLURE_RESULT_PATH = './allure'
     }
