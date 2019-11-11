@@ -15,6 +15,7 @@
 
 
 # Generate report:
+Make sure you have allure installed (or install by running: brew install allure)
     allure generate "./allure/" -o ./reports/ --clean
 
 
