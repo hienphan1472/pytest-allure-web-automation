@@ -23,4 +23,5 @@ moment = '==0.8.2'
 python_version = "3.7"
 
 [scripts]
+test_all = "python3 -m pytest -n=2 --alluredir=./allure --clean-alluredir --driver chrome"
 generate_allure_report = "allure generate ./allure/ -o ./reports/ --clean"
