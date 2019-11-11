@@ -21,3 +21,7 @@ moment = '==0.8.2'
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+
+generate_allure_report = "allure generate ./allure/ -o ./reports/ --clean"
