@@ -1,5 +1,6 @@
+import datetime
+
 import allure
-import moment
 import pytest
 
 
@@ -30,6 +31,6 @@ def remove_special_characters(text):
 
 
 def save_screenshot(driver, name):
-    now = moment.now().strftime("%d-%m-%Y")
+    now = datetime.datetime.now().strftime("%d-%m-%Y")
     _name = remove_special_characters(name)
     allure.attach(driver.get_screenshot_as_png(), _name + "_" + now, attachment_type=allure.attachment_type.PNG)
